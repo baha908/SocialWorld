@@ -1,34 +1,50 @@
-<form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form-signin">
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="form-signin container">
   <div class="text-center mb-4">
     <h1 class="h3 mb-3 fw-normal">Sisteme Giriş</h1>
   </div>
-  <div class="form-label-group">
-    <label for="inputEmail" class="visually-hidden">Kullanıcı Adı</label>
+  <div class="form-label-group  m-4">
+    <label for="email" class="visually-hidden">Email</label>
     <input
       type="text"
-      #userName="ngModel"
-      [(ngModel)]="model.email"
-      id="userName"
-      name="userName"
+      formControlName="email"
+      id="email"
+      name="email"
       class="form-control"
-      placeholder="Kullanıcı Adı"
+      placeholder="Email"
       required
       autofocus
     />
+    <div
+      class="alert alert-danger"
+      *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.dirty"
+    >
+      Email adresinizi girmediniz!
+    </div>
   </div>
-  <div class="form-label-group">
+  <div class="form-label-group m-4">
     <label for="inputPassword" class="visually-hidden">Şifre</label>
     <input
       type="password"
-      #password="ngModel"
-      [(ngModel)]="model.password"
+      formControlName="password"
       id="password"
       name="password"
       class="form-control"
       placeholder="Şifre"
       required
     />
+    <div
+      class="alert alert-danger"
+      *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.dirty"
+    >
+      Şifrenizi girmediniz!
+    </div>
   </div>
-  <button class="w-100 btn btn-lg btn-primary" type="submit">Giriş</button>
+  <button
+    class="btn btn-lg btn-primary m-4"
+    type="submit"
+    [disabled]="loginForm.invalid"
+  >
+    Giriş
+  </button>
   <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
 </form>

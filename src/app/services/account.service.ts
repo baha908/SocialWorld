@@ -21,7 +21,6 @@ export class AccountService {
         tap((data) => {
           localStorage.setItem('loggedUser', user.email);
           localStorage.setItem('token', data.token);
-          console.log(localStorage.getItem('token'));
           return true;
         })
       )
