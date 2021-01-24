@@ -1,0 +1,48 @@
+<form #loginForm="ngForm" (ngSubmit)="register(loginForm)" class="form-signin">
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-3 fw-normal">Sisteme Kayıt</h1>
+  </div>
+  <div class="form-label-group">
+    <label for="inputEmail" class="visually-hidden">Ad Soyad</label>
+    <input
+      type="text"
+      #userName="ngModel"
+      [(ngModel)]="model.name"
+      id="name"
+      name="name"
+      class="form-control"
+      placeholder="Ad Soyad"
+      required
+      autofocus
+    />
+  </div>
+  <div class="form-label-group">
+    <label for="inputEmail" class="visually-hidden">Email</label>
+    <input
+      type="text"
+      #userName="ngModel"
+      [(ngModel)]="model.email"
+      id="userName"
+      name="userName"
+      class="form-control"
+      placeholder="Email"
+      required
+      autofocus
+    />
+  </div>
+  <div class="form-label-group">
+    <label for="inputPassword" class="visually-hidden">Şifre</label>
+    <input
+      type="password"
+      #password="ngModel"
+      [(ngModel)]="model.password"
+      id="password"
+      name="password"
+      class="form-control"
+      placeholder="Şifre"
+      required
+    />
+  </div>
+  <button class="w-100 btn btn-lg btn-primary" type="submit">Giriş</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+</form>
