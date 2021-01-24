@@ -1,67 +1,78 @@
-<form [formGroup]="registerForm" (ngSubmit)="register()" class="form-signin container">
-  <div class="text-center mb-4">
-    <h1 class="h3 mb-3 fw-normal">Sisteme Kayıt</h1>
-  </div>
-  <div class="form-label-group m-4">
-    <label for="name" class="visually-hidden">Ad Soyad</label>
-    <input
-      type="name"
-      formControlName="name"
-      id="name"
-      name="name"
-      class="form-control"
-      placeholder="Ad Soyad"
-      required
-    />
-    <div
-      class="alert alert-danger m-4"
-      *ngIf="registerForm.get('name')?.hasError('required') && registerForm.get('name')?.dirty"
-    >
-      Adınızı girmediniz!
+<div class="d-flex justify-content-center">
+  <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-signin text-center mt-5">
+    <div>
+      <h1 class="h3 mb-3 font-weight-normal">Kayıt Yap</h1>
     </div>
-  </div>
-  <div class="form-label-group m-4">
-    <label for="email" class="visually-hidden">Email</label>
-    <input
-      type="email"
-      formControlName="email"
-      id="email"
-      name="email"
-      class="form-control"
-      placeholder="Email"
-      required
-    />
-    <div
-      class="alert alert-danger m-4"
-      *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.dirty"
-    >
-      Email adresinizi girmediniz!
+    <div class="mb-2">
+      <label for="name" class="sr-only">Ad Soyad</label>
+      <input
+        type="name"
+        formControlName="name"
+        id="name"
+        name="name"
+        class="form-control"
+        placeholder="Ad Soyad"
+        required
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          registerForm.get('name')?.hasError('required') &&
+          registerForm.get('name')?.dirty
+        "
+      >
+        Adınızı girmediniz!
+      </div>
     </div>
-  </div>
-  <div class="form-label-group m-4">
-    <label for="password" class="visually-hidden">Şifre</label>
-    <input
-      type="text"
-      formControlName="password"
-      type="password"
-      id="password"
-      name="password"
-      class="form-control"
-      placeholder="Şifre"
-      required
-    />
-    <div
-      class="alert alert-danger m-4"
-      *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.dirty"
-    >
-      Şifrenizi girmediniz!
+    <div class="mb-2">
+      <label for="email" class="sr-only">Email</label>
+      <input
+        type="email"
+        formControlName="email"
+        id="email"
+        name="email"
+        class="form-control"
+        placeholder="Email"
+        required
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          registerForm.get('email')?.hasError('required') &&
+          registerForm.get('email')?.dirty
+        "
+      >
+        Email adresinizi girmediniz!
+      </div>
     </div>
-  </div>
-  <button
-    class="btn btn-lg btn-primary m-4"
-    type="submit"
-    [disabled]="registerForm.invalid"
-  >
-    Kayıt
-  </button>
-</form>
+    <div class="mb-2">
+      <label for="password" class="sr-only">Şifre</label>
+      <input
+        type="text"
+        formControlName="password"
+        type="password"
+        id="password"
+        name="password"
+        class="form-control"
+        placeholder="Şifre"
+        required
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          registerForm.get('password')?.hasError('required') &&
+          registerForm.get('password')?.dirty
+        "
+      >
+        Şifrenizi girmediniz!
+      </div>
+    </div>
+    <button
+      class="btn btn-lg btn-primary btn-block"
+      type="submit"
+      [disabled]="registerForm.invalid"
+    >
+      Kayıt
+    </button>
+  </form>
+</div>

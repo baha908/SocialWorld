@@ -1,9 +1,10 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()" class="form-signin container">
-  <div class="text-center mb-4">
-    <h1 class="h3 mb-3 fw-normal">Sisteme Giriş</h1>
+<div class="d-flex justify-content-center">
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="form-signin text-center mt-5">
+  <div>
+    <h1 class="h3 mb-3 font-weight-normal">Giriş Yap</h1>
   </div>
-  <div class="form-label-group  m-4">
-    <label for="email" class="visually-hidden">Email</label>
+  <div class="mb-2">
+    <label for="email" class="sr-only">Email</label>
     <input
       type="text"
       formControlName="email"
@@ -21,8 +22,8 @@
       Email adresinizi girmediniz!
     </div>
   </div>
-  <div class="form-label-group m-4">
-    <label for="inputPassword" class="visually-hidden">Şifre</label>
+  <div class="mb-2">
+    <label for="inputPassword" class="sr-only">Şifre</label>
     <input
       type="password"
       formControlName="password"
@@ -40,11 +41,11 @@
     </div>
   </div>
   <button
-    class="btn btn-lg btn-primary m-4"
+    class="btn btn-lg btn-primary btn-block"
     type="submit"
     [disabled]="loginForm.invalid"
   >
     Giriş
   </button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
 </form>
+</div>
