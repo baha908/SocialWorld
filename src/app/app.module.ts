@@ -13,9 +13,10 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { AccountService } from './services/account.service';
 import { AlertifyService } from './services/alertify.service';
+import { CompanyComponent } from './company/company.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -23,7 +24,8 @@ import { AlertifyService } from './services/alertify.service';
     NavBarComponent,
     FooterComponent,
     SidebarComponent,
-  ],
+      CompanyComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,

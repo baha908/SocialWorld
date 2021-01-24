@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
+import { User } from '../login/user';
 import { UserLoginModel } from '../login/user_login_model';
 import { UserRegisterModel } from '../register/user_register_model';
 
@@ -37,9 +38,22 @@ export class AccountService {
       .post<any>(this.path + 'signup', user, httpOptions)
       .toPromise();
   }
+
+  async getActiveUser(): Promise<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return await this.http
+      .get<User>(this.path + 'getactiveuser', httpOptions).toPromise();
+  }
+
   isLoggedIn(): boolean {
     return localStorage.getItem('token') != null;
   }
+
   logout(): void {
     localStorage.removeItem('loggedUser');
     localStorage.removeItem('token');

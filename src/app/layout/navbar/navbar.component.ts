@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,13 +10,14 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(private accountService: AccountService, private router: Router, private alertifyService: AlertifyService) {}
 
   isLoggedIn(): boolean {
     return this.accountService.isLoggedIn();
   }
   logout(): void {
     this.accountService.logout();
+    this.alertifyService.warning('Çıkış yapıldı');
     this.router.navigate(['home']);
   }
   ngOnInit(): void{}
