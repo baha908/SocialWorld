@@ -15,11 +15,12 @@ import { AccountService } from './services/account.service';
 import { AlertifyService } from './services/alertify.service';
 import { CompanyComponent } from './company/company.component';
 import { AddCompanyComponent } from './company/add-company/add-company.component';
-import { UserGuard } from './login/user.guard';
-import { VolunteerGuard } from './login/volunteer.guard';
-import { EmployerGuard } from './login/employer.guard';
+import { UserGuard } from './guards/user.guard';
+import { VolunteerGuard } from './guards/volunteer.guard';
+import { EmployerGuard } from './guards/employer.guard';
 import { JobComponent } from './job/job.component';
 import { CompanyService } from './services/company.service';
+import { AddJobComponent } from './job/add-job/add-job.component';
 
 @NgModule({
   declarations: [		
@@ -32,7 +33,8 @@ import { CompanyService } from './services/company.service';
     SidebarComponent,
       CompanyComponent,
       AddCompanyComponent,
-      JobComponent
+      JobComponent,
+      AddJobComponent
    ],
   imports: [
     BrowserModule,

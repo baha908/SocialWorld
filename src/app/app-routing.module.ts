@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddCompanyComponent } from './company/add-company/add-company.component';
 import { CompanyComponent } from './company/company.component';
 import { HomeComponent } from './home/home.component';
-import { AddJobComponent } from './job/add-job/add-job.component';
 import { JobComponent } from './job/job.component';
-import { EmployerGuard } from './login/employer.guard';
+import { EmployerGuard } from './guards/employer.guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AddJobComponent } from './job/add-job/add-job.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},

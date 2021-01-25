@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { CompanyService } from 'src/app/services/company.service';
-import { Company } from '../company';
+import { Company } from '../../models/company';
 
 @Component({
   selector: 'app-add-company',
@@ -33,7 +33,7 @@ export class AddCompanyComponent implements OnInit {
       this.company = Object.assign({}, this.addCompanyForm.value);
       this.company.userId = userId;
     }
-    this.companyService.addProduct(this.company).subscribe((data) => {
+    this.companyService.addCompany(this.company).subscribe((data) => {
       this.alertifyService.success(data.name + ' şirketi eklendi');
       this.router.navigate(['company']);
     });

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Company } from '../company/company';
+import { Company } from '../models/company';
 import { AccountService } from './account.service';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class CompanyService {
   constructor(private http: HttpClient) {}
   path = 'http://localhost:56183/api/company/';
 
-  addProduct(company: Company): Observable<Company> {
+  addCompany(company: Company): Observable<Company> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

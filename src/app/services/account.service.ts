@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { User } from '../login/user';
-import { UserLoginModel } from '../login/user_login_model';
-import { UserRegisterModel } from '../register/user_register_model';
+import { User } from '../models/user';
+import { UserLoginModel } from '../models/user-login-model';
+import { UserRegisterModel } from '../models/user-register-model';
 
 @Injectable()
 export class AccountService {
