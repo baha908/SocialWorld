@@ -8,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   constructor() { }
-
-  ngOnInit() {
+  isLoggedIn(): boolean{
+    return localStorage.getItem('token') != null;
+  }
+  ngOnInit(): void {
   }
 
 }

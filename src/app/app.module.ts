@@ -14,6 +14,7 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { AccountService } from './services/account.service';
 import { AlertifyService } from './services/alertify.service';
 import { CompanyComponent } from './company/company.component';
+import { AddCompanyComponent } from './company/add_company/add_company.component';
 
 @NgModule({
   declarations: [	
@@ -24,7 +25,8 @@ import { CompanyComponent } from './company/company.component';
     NavBarComponent,
     FooterComponent,
     SidebarComponent,
-      CompanyComponent
+      CompanyComponent,
+      AddCompanyComponent
    ],
   imports: [
     BrowserModule,

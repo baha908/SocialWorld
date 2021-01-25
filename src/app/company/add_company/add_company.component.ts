@@ -6,7 +6,6 @@ import { AccountService } from 'src/app/services/account.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { Company } from '../company';
-import { AddCompanyModel} from '../add_company_model';
 
 @Component({
   selector: 'app-add-company',
@@ -23,20 +22,17 @@ export class AddCompanyComponent implements OnInit {
   addCompanyForm!: FormGroup;
   company: Company = new Company();
 
-  createaddCompanyForm(): void {
+  createAddCompanyForm(): void {
     this.addCompanyForm = this.formBuilder.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
     });
   }
 
-  async addCompany(addCompanyModel: AddCompanyModel): Promise<void> {
+  async addCompany(): Promise<void> {
     if (this.addCompanyForm.valid) {
-      this.company = {
-        name: addCompanyModel.name,
-        address: addCompanyModel.address,
-        userId: Number((await this.accountService.getActiveUser()).id),
-      };
+      this.company = Object.assign({}, this.addCompanyForm.value);
+      this.company.userId = Number((await this.accountService.getActiveUser()).id);
     }
     this.companyService.addProduct(this.company).subscribe((data) => {
       console.log(JSON.stringify(data));
@@ -44,7 +40,6 @@ export class AddCompanyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createaddCompanyForm();
-    this.addCompany({name: 'baha', address: 'asdasdasd'});
+    this.createAddCompanyForm();
   }
 }
