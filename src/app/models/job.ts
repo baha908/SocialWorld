@@ -1,5 +1,6 @@
 export class Job {
-    name!: string;
-    jobTypeId!: number;
-    companyId!: number;
+  id!: number;
+  name!: string;
+  jobTypeId!: number;
+  companyId!: number;
 }

@@ -10,14 +10,15 @@ export class AccountService {
   constructor(private http: HttpClient) {}
   path = 'http://localhost:56183/api/auth/';
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    }),
+  };
   async login(user: UserLoginModel): Promise<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
     const response = await this.http
-      .post<any>(this.path + 'signin', user, httpOptions)
+      .post<any>(this.path + 'signin', user, this.httpOptions)
       .pipe(
         tap((data) => {
           localStorage.setItem('loggedUser', user.email);
@@ -31,25 +32,14 @@ export class AccountService {
   }
 
   register(user: UserRegisterModel): Promise<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
     return this.http
-      .post<any>(this.path + 'signup', user, httpOptions)
+      .post<any>(this.path + 'signup', user, this.httpOptions)
       .toPromise();
   }
 
   async getActiveUser(): Promise<User> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      }),
-    };
     return await this.http
-      .get<User>(this.path + 'getactiveuser', httpOptions).toPromise();
+      .get<User>(this.path + 'getactiveuser', this.httpOptions).toPromise();
   }
 
   isLoggedIn(): boolean {

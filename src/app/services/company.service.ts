@@ -10,13 +10,13 @@ export class CompanyService {
   constructor(private http: HttpClient) {}
   path = 'http://localhost:56183/api/company/';
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    }),
+  };
   addCompany(company: Company): Observable<Company> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      }),
-    };
     return this.http.post<Company>(
       this.path,
       {
@@ -24,28 +24,34 @@ export class CompanyService {
         Address: company.address,
         AppUserId: company.userId,
       },
-      httpOptions
+      this.httpOptions
     );
   }
-
+  editCompany(company: Company): Observable<Company> {
+    return this.http.put<Company>(
+      this.path,
+      {
+        Id: company.id,
+        Address: company.address,
+        Name: company.name,
+      },
+      this.httpOptions
+    );
+  }
+  deleteCompany(id: number): Observable<void> {
+    return this.http.delete<void>(this.path + id, this.httpOptions);
+  }
   getUserCompanies(): Observable<Company[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      }),
-    };
     return this.http.get<Company[]>(
       this.path + 'getcompanies/' + localStorage.getItem('userId'),
-      httpOptions
+      this.httpOptions
     );
   }
   async ifUserHaveCompany(): Promise<boolean> {
     const response = await this.getUserCompanies().toPromise();
-    if (response.length === 0){
+    if (response.length === 0) {
       return false;
     }
     return true;
   }
 }
-

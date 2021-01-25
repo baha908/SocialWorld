@@ -23,7 +23,7 @@ import { CompanyService } from './services/company.service';
 import { AddJobComponent } from './job/add-job/add-job.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -31,11 +31,11 @@ import { AddJobComponent } from './job/add-job/add-job.component';
     NavBarComponent,
     FooterComponent,
     SidebarComponent,
-      CompanyComponent,
-      AddCompanyComponent,
-      JobComponent,
-      AddJobComponent
-   ],
+    CompanyComponent,
+    AddCompanyComponent,
+    JobComponent,
+    AddJobComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,7 +43,14 @@ import { AddJobComponent } from './job/add-job/add-job.component';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [AccountService, AlertifyService, UserGuard, VolunteerGuard, EmployerGuard, CompanyService],
+  providers: [
+    AccountService,
+    AlertifyService,
+    UserGuard,
+    VolunteerGuard,
+    EmployerGuard,
+    CompanyService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
