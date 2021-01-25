@@ -29,23 +29,26 @@ export class JobService {
       this.httpOptions
     );
   }
-  editJob(job: Job): Observable<Job> {
-    return this.http.put<Job>(
+  editJob(job: Job): Promise<any> {
+    return this.http.put<any>(
       this.jobPath + job.id,
       {
         Name: job.name,
         Id: job.id,
       },
       this.httpOptions
-    );
+    ).toPromise();
   }
-  deleteJob(id: number): Observable<void> {
-    return this.http.delete<void>(this.jobPath + id, this.httpOptions);
+  deleteJob(id: number): Promise<void> {
+    return this.http.delete<void>(this.jobPath + id, this.httpOptions).toPromise();
   }
   getJobTypes(): Observable<JobType[]> {
     return this.http.get<JobType[]>(this.jobTypePath, this.httpOptions);
   }
-  getJobs(): Observable<JobType[]> {
-    return this.http.get<JobType[]>(this.jobPath, this.httpOptions);
+  getJobs(): Observable<Job[]> {
+    return this.http.get<Job[]>(this.jobPath, this.httpOptions);
+  }
+  getJob(id: number): Observable<Job> {
+    return this.http.get<Job>(this.jobPath + id, this.httpOptions);
   }
 }

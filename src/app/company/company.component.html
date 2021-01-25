@@ -1,12 +1,12 @@
-<div class="container">
+<div class="container" *ngFor="let company of companies">
   <div class="row">
     <div class="col-md-6 img">
       <img src="https://www.artistiko.net/assets/front/images/mediagallery/showcase/socialecom.jpg"  alt="" class="img-rounded">
     </div>
     <div class="col-md-6 details">
       <blockquote>
-        <h5>Fiona Gallagher</h5>
-        <small><cite title="Source Title">Chicago, United States of America  <i class="icon-map-marker"></i></cite></small>
+        <h5>{{company.name}}</h5>
+        <small><cite title="Source Title">{{company.address}} <i class="icon-map-marker"></i></cite></small>
       </blockquote>
       <p>
         fionagallager@shameless.com <br>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Company } from '../models/company';
 import { CompanyService } from '../services/company.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { CompanyService } from '../services/company.service';
 export class CompanyComponent implements OnInit {
   constructor(private companyService: CompanyService) {}
 
-  ngOnInit(): void {
+  companies!: Company[];
+  async ngOnInit(): Promise<void> {
+    this.companies = await this.companyService.getUserCompanies().toPromise();
   }
 }

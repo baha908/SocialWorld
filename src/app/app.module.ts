@@ -21,6 +21,7 @@ import { EmployerGuard } from './guards/employer.guard';
 import { JobComponent } from './job/job.component';
 import { CompanyService } from './services/company.service';
 import { AddJobComponent } from './job/add-job/add-job.component';
+import { EditJobComponent } from './job/edit-job/edit-job.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AddJobComponent } from './job/add-job/add-job.component';
     AddCompanyComponent,
     JobComponent,
     AddJobComponent,
+    EditJobComponent
   ],
   imports: [
     BrowserModule,

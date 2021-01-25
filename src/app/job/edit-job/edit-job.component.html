@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <form
+    [formGroup]="editJobForm"
+    (ngSubmit)="editJob()"
+    class="form-signin mt-5"
+  >
+    <div class="form-group row">
+      <div class="col-sm-10 offset-sm-2">
+        <div class="text-center">
+          <h1 class="h3 mb-3 font-weight-normal">Düzenle</h1>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label">İş adı</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          formControlName="name"
+          id="name"
+          name="name"
+          class="form-control"
+          placeholder="Şirket ismi"
+          required
+          autofocus
+        />
+      </div>
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="
+        editJobForm.get('name')?.hasError('required') &&
+        editJobForm.get('name')?.dirty
+      "
+    >
+      İş adı girmediniz.
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-10 offset-sm-2">
+        <button
+          class="btn btn-lg btn-primary btn-block"
+          type="submit"
+          [disabled]="editJobForm.invalid"
+        >
+          Onayla
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

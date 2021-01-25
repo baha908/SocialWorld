@@ -27,7 +27,7 @@ export class CompanyService {
       this.httpOptions
     );
   }
-  editCompany(company: Company): Observable<Company> {
+  editCompany(company: Company): Promise<Company> {
     return this.http.put<Company>(
       this.path,
       {
@@ -36,10 +36,10 @@ export class CompanyService {
         Name: company.name,
       },
       this.httpOptions
-    );
+    ).toPromise();
   }
-  deleteCompany(id: number): Observable<void> {
-    return this.http.delete<void>(this.path + id, this.httpOptions);
+  deleteCompany(id: number): Promise<void> {
+    return this.http.delete<void>(this.path + id, this.httpOptions).toPromise();
   }
   getUserCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(
