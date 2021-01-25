@@ -10,13 +10,13 @@ export class AccountService {
   constructor(private http: HttpClient) {}
   path = 'http://localhost:56183/api/auth/';
 
-  login(user: UserLoginModel): Promise<any> {
+  async login(user: UserLoginModel): Promise<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
     };
-    return this.http
+    const response = await this.http
       .post<any>(this.path + 'signin', user, httpOptions)
       .pipe(
         tap((data) => {
@@ -26,6 +26,8 @@ export class AccountService {
         })
       )
       .toPromise();
+    localStorage.setItem('userId', (await this.getActiveUser()).id.toString());
+    return response;
   }
 
   register(user: UserRegisterModel): Promise<any> {

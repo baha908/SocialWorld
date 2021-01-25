@@ -1,23 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { AccountService } from 'src/app/services/account.service';
+import { Router } from '@angular/router';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { Company } from '../company';
 
 @Component({
   selector: 'app-add-company',
-  templateUrl: './add_company.component.html',
-  styleUrls: ['./add_company.component.scss'],
+  templateUrl: './add-company.component.html',
+  styleUrls: ['./add-company.component.scss']
 })
 export class AddCompanyComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private companyService: CompanyService,
-    private accountService: AccountService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private router: Router
   ) {}
   addCompanyForm!: FormGroup;
   company: Company = new Company();
@@ -29,13 +27,15 @@ export class AddCompanyComponent implements OnInit {
     });
   }
 
-  async addCompany(): Promise<void> {
+  addCompany(): void {
     if (this.addCompanyForm.valid) {
+      const userId = Number(localStorage.getItem('userId'));
       this.company = Object.assign({}, this.addCompanyForm.value);
-      this.company.userId = Number((await this.accountService.getActiveUser()).id);
+      this.company.userId = userId;
     }
     this.companyService.addProduct(this.company).subscribe((data) => {
-      console.log(JSON.stringify(data));
+      this.alertifyService.success(data.name + ' şirketi eklendi');
+      this.router.navigate(['company']);
     });
   }
 

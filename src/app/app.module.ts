@@ -14,10 +14,15 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { AccountService } from './services/account.service';
 import { AlertifyService } from './services/alertify.service';
 import { CompanyComponent } from './company/company.component';
-import { AddCompanyComponent } from './company/add_company/add_company.component';
+import { AddCompanyComponent } from './company/add-company/add-company.component';
+import { UserGuard } from './login/user.guard';
+import { VolunteerGuard } from './login/volunteer.guard';
+import { EmployerGuard } from './login/employer.guard';
+import { JobComponent } from './job/job.component';
+import { CompanyService } from './services/company.service';
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -26,7 +31,8 @@ import { AddCompanyComponent } from './company/add_company/add_company.component
     FooterComponent,
     SidebarComponent,
       CompanyComponent,
-      AddCompanyComponent
+      AddCompanyComponent,
+      JobComponent
    ],
   imports: [
     BrowserModule,
@@ -35,7 +41,7 @@ import { AddCompanyComponent } from './company/add_company/add_company.component
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [AccountService, AlertifyService],
+  providers: [AccountService, AlertifyService, UserGuard, VolunteerGuard, EmployerGuard, CompanyService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

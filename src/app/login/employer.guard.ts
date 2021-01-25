@@ -5,20 +5,19 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { AccountService } from '../services/account.service';
+import { CompanyService } from '../services/company.service';
 
 @Injectable()
-export class LoginGuard implements CanActivate {
-  constructor(private accountService: AccountService, private router: Router) {}
-  canActivate(
+export class EmployerGuard implements CanActivate {
+  constructor(private router: Router, private companyService: CompanyService) {}
+  async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean {
-    const isLoggedIn = this.accountService.isLoggedIn();
-    if (isLoggedIn) {
+  ): Promise<boolean> {
+    if (await this.companyService.ifUserHaveCompany()) {
       return true;
     }
-    this.router.navigate(['login']);
+    this.router.navigate(['home']);
     return false;
   }
 }
