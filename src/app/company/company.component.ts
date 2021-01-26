@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../models/company';
+import { AlertifyService } from '../services/alertify.service';
 import { CompanyService } from '../services/company.service';
 
 @Component({
@@ -8,10 +9,31 @@ import { CompanyService } from '../services/company.service';
   styleUrls: ['./company.component.scss'],
 })
 export class CompanyComponent implements OnInit {
-  constructor(private companyService: CompanyService) {}
+  constructor(
+    private companyService: CompanyService,
+    private alertifyService: AlertifyService
+  ) {}
 
   companies!: Company[];
-  async ngOnInit(): Promise<void> {
-    this.companies = await this.companyService.getUserCompanies().toPromise();
+  deleteJob(id: number): void {
+    this.companyService
+      .deleteCompany(id)
+      .then(() => {
+        this.getCompanies();
+      })
+      .then(() => {
+        this.alertifyService.success('Silme başarılı');
+      })
+      .catch(() => {
+        this.alertifyService.error('Hata');
+      });
+  }
+  getCompanies(): void {
+    this.companyService.getUserCompanies().subscribe((data) => {
+      this.companies = data;
+    });
+  }
+  ngOnInit(): void {
+    this.getCompanies();
   }
 }

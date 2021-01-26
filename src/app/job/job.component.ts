@@ -20,16 +20,21 @@ export class JobComponent implements OnInit {
     this.jobService
       .deleteJob(id)
       .then(() => {
+        this.getJobs();
+      })
+      .then(() => {
         this.alertifyService.success('Silme başarılı');
-        window.location.reload();
       })
       .catch(() => {
         this.alertifyService.error('Hata');
       });
   }
-  ngOnInit(): void {
+  getJobs(): void{
     this.jobService.getJobs().subscribe((data) => {
       this.jobs = data;
     });
+  }
+  ngOnInit(): void {
+    this.getJobs();
   }
 }

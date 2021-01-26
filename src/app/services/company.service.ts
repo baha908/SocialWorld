@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Company } from '../models/company';
-import { EditCompanyModel } from '../models/edit-company-model';
 import { AccountService } from './account.service';
 
 @Injectable()
@@ -28,16 +27,18 @@ export class CompanyService {
       this.httpOptions
     );
   }
-  editCompany(company: EditCompanyModel): Promise<Company> {
-    return this.http.put<Company>(
-      this.path,
-      {
-        Id: company.id,
-        Address: company.address,
-        Name: company.name,
-      },
-      this.httpOptions
-    ).toPromise();
+  editCompany(company: Company): Promise<Company> {
+    return this.http
+      .put<Company>(
+        this.path + company.id,
+        {
+          Id: company.id,
+          Address: company.address,
+          Name: company.name,
+        },
+        this.httpOptions
+      )
+      .toPromise();
   }
   deleteCompany(id: number): Promise<void> {
     return this.http.delete<void>(this.path + id, this.httpOptions).toPromise();
@@ -49,10 +50,8 @@ export class CompanyService {
     );
   }
 
-  getCompanyById(id:number): Observable<Company>{
-    return this.http.get<Company>(
-      this.path+`${id}`, this.httpOptions
-    )
+  getCompanyById(id: number): Observable<Company> {
+    return this.http.get<Company>(this.path + `${id}`, this.httpOptions);
   }
 
   async ifUserHaveCompany(): Promise<boolean> {

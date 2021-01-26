@@ -12,22 +12,34 @@ import { EditJobComponent } from './job/edit-job/edit-job.component';
 import { EditCompanyComponent } from './company/edit-company/edit-company.component';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'company/add_company', component: AddCompanyComponent},
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'company/add_company', component: AddCompanyComponent },
   {
-    path: 'company', component: CompanyComponent, children: [{
-    path:'edit_company/:id',component:EditCompanyComponent
-  }]},
-  {path: 'job/add_job', component: AddJobComponent, canActivate: [EmployerGuard]},
-  {path: 'job/edit_job/:id', component: EditJobComponent, canActivate: [EmployerGuard]},
-  {path: 'job', component: JobComponent},
-  {path: 'register', component: RegisterComponent}
+    path: 'company',
+    component: CompanyComponent,
+  },
+  {
+    path: 'company/edit_company/:id',
+    component: EditCompanyComponent,
+  },
+  {
+    path: 'job/add_job',
+    component: AddJobComponent,
+    canActivate: [EmployerGuard],
+  },
+  {
+    path: 'job/edit_job/:id',
+    component: EditJobComponent,
+    canActivate: [EmployerGuard],
+  },
+  { path: 'job', component: JobComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,36 +1,55 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
-import { EditCompanyModel } from 'src/app/models/edit-company-model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { Company } from 'src/app/models/company';
 import { AlertifyService } from 'src/app/services/alertify.service';
-import { CompanyService } from "../../services/company.service";
+import { CompanyService } from 'src/app/services/company.service';
+
 @Component({
   selector: 'app-edit-company',
   templateUrl: './edit-company.component.html',
-  styleUrls: ['./edit-company.component.scss']
+  styleUrls: ['./edit-company.component.scss'],
 })
 export class EditCompanyComponent implements OnInit {
-
-  constructor(private service: CompanyService,private route: ActivatedRoute,private alertifyService:AlertifyService) { }
-
-  ngOnInit(): void {
-    this.getCompany();
-  }
-  model!: EditCompanyModel
-  async getCompany(): Promise<void>{
-    this.model.id = this.route.snapshot.params.id;
-    this.service.getCompanyById(this.model.id).subscribe((data) => {
-      data.id = this.model.id;
-      data.name = this.model.name;
-      data.address = this.model.address;
+  constructor(
+    private formBuilder: FormBuilder,
+    private companyService: CompanyService,
+    private route: ActivatedRoute,
+    private alertifyService: AlertifyService,
+    private router: Router
+  ) {}
+  id!: number;
+  editCompanyForm!: FormGroup;
+  company: Company = new Company();
+  createEditCompanyForm(): void {
+    this.editCompanyForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      address: ['', Validators.required],
     });
-
   }
 
   async editCompany(): Promise<void> {
-    await this.service.editCompany(this.model).then(() => {
-      this.alertifyService.success('Güncelleme Başarılı');
-      
-    });
+    if (this.editCompanyForm.valid) {
+      this.company = Object.assign({}, this.editCompanyForm.value);
+    }
+    this.company.id = this.id;
+    await this.companyService
+      .editCompany(this.company)
+      .then(() => {
+        this.alertifyService.success('Güncelleme başarılı');
+        this.router.navigate(['company']);
+      })
+      .catch(() => {
+        this.alertifyService.error('Hata');
+      });
   }
 
+  ngOnInit(): void {
+    this.id = this.route.snapshot.params.id;
+    this.createEditCompanyForm();
+    this.companyService
+      .getCompanyById(this.id)
+      .subscribe((data) => this.editCompanyForm.patchValue(data));
+  }
 }
