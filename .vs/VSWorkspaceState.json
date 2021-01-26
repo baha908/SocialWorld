@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\company",
+    "\\src\\app\\company\\edit-company",
+    "\\src\\app\\models"
+  ],
+  "SelectedNode": "\\src\\app\\models\\edit-company-model.ts",
+  "PreviewInSolutionExplorer": false
+}

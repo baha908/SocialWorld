@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-center">
+  <form>
+    <input type="hidden" name="id" [value]="this.model.id"/>
+    <div class="form-group">
+      <label>Şirket Adı</label>
+      <input type="text"
+             class="form-control form-control-lg"
+             placeholder="Full Name"
+             name="companyName" #cardOwnerName="ngModel" [(ngModel)]="this.model.name" />
+      <input type="text"
+             class="form-control form-control-lg"
+             placeholder="Address"
+             name="companyAddress" #companyAddress="ngModel" [(ngModel)]="this.model.address" />
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary">Kaydet</button>
+    </div>
+  </form>
+</div>
