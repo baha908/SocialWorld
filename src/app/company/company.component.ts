@@ -15,13 +15,16 @@ export class CompanyComponent implements OnInit {
   ) {}
 
   companies!: Company[];
-  deleteJob(id: number): void {
+  deleteCompany(id: number): void {
     this.companyService
       .deleteCompany(id)
       .then(() => {
         this.getCompanies();
       })
-      .then(() => {
+      .then(async () => {
+        if (!(await this.companyService.ifUserHaveCompany())) {
+          localStorage.removeItem('hasCompany');
+        }
         this.alertifyService.success('Silme başarılı');
       })
       .catch(() => {

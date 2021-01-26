@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 import { AlertifyService } from '../services/alertify.service';
 import { UserRegisterModel } from '../models/user-register-model';
+import { CompanyService } from '../services/company.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
     private accountService: AccountService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private companyService: CompanyService
   ) {}
   registerForm!: FormGroup;
   model: UserRegisterModel = new UserRegisterModel();
@@ -31,16 +33,21 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.model = Object.assign({}, this.registerForm.value);
     }
-    await this.accountService.register(this.model).then(async () => {
-      this.alertifyService.success(this.model.email + ' kayıt yaptı');
-      await this.accountService.login({
-        email: this.model.email,
-        password: this.model.password,
+    await this.accountService
+      .register(this.model)
+      .then(async () => {
+        await this.accountService.login({
+          email: this.model.email,
+          password: this.model.password,
+        });
+      })
+      .catch(() => {
+        this.alertifyService.error('kayıt başarısız');
+      })
+      .then(() => {
+        this.alertifyService.success(this.model.email + ' kayıt yaptı');
+        this.router.navigate(['']);
       });
-      this.router.navigate(['']);
-    }).catch(() => {
-      this.alertifyService.error('kayıt başarısız');
-    });
   }
   ngOnInit(): void {
     this.createRegisterForm();

@@ -10,15 +10,13 @@ import { CompanyService } from 'src/app/services/company.service';
 })
 export class SidebarComponent implements OnInit {
   private readonly onDestroy = new Subject<void>();
-  constructor(private companyService: CompanyService) {}
+  constructor() {}
 
-  isUserHaveCompany = false;
+  isUserHaveCompany(): boolean{
+    return localStorage.getItem('hasCompany') != null;
+  }
   isLoggedIn(): boolean {
     return localStorage.getItem('token') != null;
   }
-  ngOnInit(): void {
-    this.companyService.getUserCompanies().subscribe((data) => {
-      this.isUserHaveCompany = data.length !== 0;
-    });
-  }
+  ngOnInit(): void {}
 }

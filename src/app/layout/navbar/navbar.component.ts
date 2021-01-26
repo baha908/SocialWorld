@@ -18,7 +18,7 @@ export class NavBarComponent implements OnInit {
   logout(): void {
     this.accountService.logout();
     this.alertifyService.warning('Çıkış yapıldı');
-    this.router.navigate(['home']);
+    this.router.navigate(['login']);
   }
   ngOnInit(): void{}
 }

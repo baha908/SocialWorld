@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { retry, tap } from 'rxjs/operators';
 import { Company } from '../models/company';
 import { AccountService } from './account.service';
 
@@ -40,14 +40,17 @@ export class CompanyService {
       )
       .toPromise();
   }
-  deleteCompany(id: number): Promise<void> {
-    return this.http.delete<void>(this.path + id, this.httpOptions).toPromise();
+  async deleteCompany(id: number): Promise<void> {
+    const response = await this.http
+      .delete<void>(this.path + id, this.httpOptions)
+      .toPromise();
+    return response;
   }
   getUserCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(
       this.path + 'getcompanies/' + localStorage.getItem('userId'),
       this.httpOptions
-    );
+    ).pipe(retry(3));
   }
 
   getCompanyById(id: number): Observable<Company> {

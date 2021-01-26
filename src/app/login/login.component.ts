@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 import { AlertifyService } from '../services/alertify.service';
 import { UserLoginModel } from '../models/user-login-model';
+import { CompanyService } from '../services/company.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private companyService: CompanyService
   ) {}
   loginForm!: FormGroup;
   model: UserLoginModel = new UserLoginModel();

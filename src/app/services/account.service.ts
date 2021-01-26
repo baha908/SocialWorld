@@ -1,13 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { retry, tap } from 'rxjs/operators';
 import { User } from '../models/user';
 import { UserLoginModel } from '../models/user-login-model';
 import { UserRegisterModel } from '../models/user-register-model';
+import { CompanyService } from './company.service';
 
 @Injectable()
 export class AccountService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private companyService: CompanyService
+  ) {}
   path = 'http://localhost:56183/api/auth/';
 
   httpOptions = {
@@ -17,21 +21,30 @@ export class AccountService {
     }),
   };
   async login(user: UserLoginModel): Promise<any> {
-    const response = await this.http
-      .post<any>(this.path + 'signin', user, this.httpOptions)
-      .pipe(
-        tap((data) => {
-          localStorage.setItem('loggedUser', user.email);
-          localStorage.setItem('token', data.token);
-          return true;
-        })
-      )
-      .toPromise();
-    localStorage.setItem('userId', (await this.getActiveUser()).id.toString());
-    return response;
+    let userId!: string;
+    let ifUserHaveCompany: boolean;
+    return await this.http
+      .post<any>(this.path + 'signin', user, this.httpOptions).pipe(retry(3))
+      .toPromise()
+      .then(async (data) => {
+        localStorage.setItem('loggedUser', user.email);
+        localStorage.setItem('token', data.token);
+      })
+      .then(async () => {
+        userId = (await this.getActiveUser()).id.toString();
+      })
+      .then(async () => {
+        localStorage.setItem('userId', userId);
+        ifUserHaveCompany = await this.companyService.ifUserHaveCompany();
+      })
+      .then(async () => {
+        if (ifUserHaveCompany) {
+          localStorage.setItem('hasCompany', 'true');
+        }
+      });
   }
 
-  register(user: UserRegisterModel): Promise<any> {
+  async register(user: UserRegisterModel): Promise<any> {
     return this.http
       .post<any>(this.path + 'signup', user, this.httpOptions)
       .toPromise();
@@ -39,7 +52,8 @@ export class AccountService {
 
   async getActiveUser(): Promise<User> {
     return await this.http
-      .get<User>(this.path + 'getactiveuser', this.httpOptions).toPromise();
+      .get<User>(this.path + 'getactiveuser', this.httpOptions).pipe(retry(3))
+      .toPromise();
   }
 
   isLoggedIn(): boolean {
@@ -50,5 +64,6 @@ export class AccountService {
     localStorage.removeItem('loggedUser');
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    localStorage.removeItem('hasCompany');
   }
 }

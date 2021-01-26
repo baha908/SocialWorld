@@ -34,6 +34,7 @@ export class AddCompanyComponent implements OnInit {
       this.company.userId = userId;
     }
     this.companyService.addCompany(this.company).subscribe((data) => {
+      localStorage.setItem('hasCompany', 'true');
       this.alertifyService.success(data.name + ' şirketi eklendi');
       this.router.navigate(['company']);
     });
