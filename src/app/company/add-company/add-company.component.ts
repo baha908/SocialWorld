@@ -24,6 +24,10 @@ export class AddCompanyComponent implements OnInit {
     this.addCompanyForm = this.formBuilder.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
+      explanation: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      photoString: ['', Validators.required],
+      email: ['', Validators.required],
     });
   }
 

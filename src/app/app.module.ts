@@ -23,6 +23,7 @@ import { CompanyService } from './services/company.service';
 import { AddJobComponent } from './job/add-job/add-job.component';
 import { EditJobComponent } from './job/edit-job/edit-job.component';
 import { EditCompanyComponent } from './company/edit-company/edit-company.component';
+import { DetailJobComponent } from './job/detail-job/detail-job.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EditCompanyComponent } from './company/edit-company/edit-company.compon
     JobComponent,
     AddJobComponent,
     EditJobComponent,
-    EditCompanyComponent
+    EditCompanyComponent,
+    DetailJobComponent
   ],
   imports: [
     BrowserModule,

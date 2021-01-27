@@ -30,6 +30,8 @@ export class AddJobComponent implements OnInit {
       name: ['', Validators.required],
       jobTypeId: ['', Validators.required],
       companyId: ['', Validators.required],
+      photoString: ['', Validators.required],
+      explanation: ['', Validators.required],
     });
   }
 

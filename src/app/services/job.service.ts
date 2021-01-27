@@ -21,6 +21,8 @@ export class JobService {
         Name: job.name,
         JobTypeId: job.jobTypeId,
         CompanyId: job.companyId,
+        Explanation: job.explanation,
+        PhotoString: job.photoString
       },
       this.httpOptions
     );
@@ -32,6 +34,8 @@ export class JobService {
       {
         Name: job.name,
         Id: job.id,
+        Explanation: job.explanation,
+        PhotoString: job.photoString
       },
       this.httpOptions
     ).toPromise();

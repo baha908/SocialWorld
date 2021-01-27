@@ -17,6 +17,10 @@ export class CompanyService {
         Name: company.name,
         Address: company.address,
         AppUserId: company.userId,
+        Email: company.email,
+        Explanation: company.explanation,
+        PhoneNumber: company.phoneNumber,
+        PhotoString: company.photoString
       },
       this.httpOptions
     );
@@ -30,6 +34,10 @@ export class CompanyService {
           Id: company.id,
           Address: company.address,
           Name: company.name,
+          Email: company.email,
+          Explanation: company.explanation,
+          PhoneNumber: company.phoneNumber,
+          PhotoString: company.photoString
         },
         this.httpOptions
       )

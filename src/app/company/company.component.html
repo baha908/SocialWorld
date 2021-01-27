@@ -1,17 +1,17 @@
 <div class="container" *ngFor="let company of companies">
   <div class="row">
     <div class="col-md-6 img">
-      <img src="https://www.artistiko.net/assets/front/images/mediagallery/showcase/socialecom.jpg"  alt="" class="img-rounded">
+      <img src={{company.photoString}}  alt="" class="img-rounded">
     </div>
     <div class="col-md-6 details">
       <blockquote>
         <h5>{{company.name}}</h5>
-        <small><cite title="Source Title">{{company.address}} <i class="icon-map-marker"></i></cite></small>
+        <small><cite title="Source Title">{{company.explanation}} <i class="icon-map-marker"></i></cite></small>
       </blockquote>
       <p>
-        fionagallager@shameless.com <br>
-        www.bootsnipp.com <br>
-        June 18, 1990
+        {{company.email}} <br>
+        {{company.address}} <br>
+        {{company.phoneNumber}}
       </p>
       <a href="/company/edit_company/{{company.id}}">Düzenle</a>
       <a (click)="deleteCompany(company.id)">Sil</a>

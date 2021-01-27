@@ -1,0 +1,6 @@
+<p>
+  {{ job.name }}
+</p>
+<a *ngIf="ifJobNotApplied" (click)="applyJob()">Katıl</a>
+
+<a (click)="deleteJob(job.id)">Sil</a>

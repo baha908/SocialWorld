@@ -12,23 +12,9 @@ import { JobService } from '../services/job.service';
 export class JobComponent implements OnInit {
   constructor(
     private jobService: JobService,
-    private alertifyService: AlertifyService,
     private router: Router,
   ) {}
   jobs!: Job[];
-  deleteJob(id: number): void {
-    this.jobService
-      .deleteJob(id)
-      .then(() => {
-        this.getJobs();
-      })
-      .then(() => {
-        this.alertifyService.success('Silme başarılı');
-      })
-      .catch(() => {
-        this.alertifyService.error('Hata');
-      });
-  }
   getJobs(): void{
     this.jobService.getJobs().subscribe((data) => {
       this.jobs = data;

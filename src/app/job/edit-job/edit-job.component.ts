@@ -31,6 +31,8 @@ export class EditJobComponent implements OnInit {
   createEditJobForm(): void {
     this.editJobForm = this.formBuilder.group({
       name: ['', Validators.required],
+      explanation: ['', Validators.required],
+      photoString: ['', Validators.required],
     });
   }
 

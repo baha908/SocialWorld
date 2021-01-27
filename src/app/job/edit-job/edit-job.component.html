@@ -5,15 +5,15 @@
     class="form-signin mt-5"
   >
     <div class="form-group row">
-      <div class="col-sm-10 offset-sm-2">
+      <div class="col-sm-9 offset-sm-3">
         <div class="text-center">
           <h1 class="h3 mb-3 font-weight-normal">Düzenle</h1>
         </div>
       </div>
     </div>
     <div class="form-group row">
-      <label for="name" class="col-sm-2 col-form-label">İş adı</label>
-      <div class="col-sm-10">
+      <label for="name" class="col-sm-3 col-form-label">İş adı</label>
+      <div class="col-sm-9">
         <input
           type="text"
           formControlName="name"
@@ -35,8 +35,59 @@
     >
       İş adı girmediniz.
     </div>
+    
     <div class="form-group row">
-      <div class="col-sm-10 offset-sm-2">
+      <label for="explanation" class="col-sm-3 col-form-label">Açıklama</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          formControlName="explanation"
+          id="explanation"
+          name="explanation"
+          class="form-control"
+          placeholder="Açıklama"
+          required
+          autofocus
+        />
+      </div>
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="
+        editJobForm.get('explanation')?.hasError('required') &&
+        editJobForm.get('explanation')?.dirty
+      "
+    >
+      Açıklama girmediniz.
+    </div>
+    
+    <div class="form-group row">
+      <label for="photoString" class="col-sm-3 col-form-label">Fotoğraf linki</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          formControlName="photoString"
+          id="photoString"
+          name="photoString"
+          class="form-control"
+          placeholder="Fotoğraf linki"
+          required
+          autofocus
+        />
+      </div>
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="
+        editJobForm.get('photoString')?.hasError('required') &&
+        editJobForm.get('photoString')?.dirty
+      "
+    >
+      Fotoğraf linki girmediniz.
+    </div>
+    
+    <div class="form-group row">
+      <div class="col-sm-9 offset-sm-3">
         <button
           class="btn btn-lg btn-primary btn-block"
           type="submit"

@@ -11,6 +11,7 @@ import { AddJobComponent } from './job/add-job/add-job.component';
 import { EditJobComponent } from './job/edit-job/edit-job.component';
 import { EditCompanyComponent } from './company/edit-company/edit-company.component';
 import { UserGuard } from './guards/user.guard';
+import { DetailJobComponent } from './job/detail-job/detail-job.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [UserGuard] },
@@ -39,6 +40,11 @@ const routes: Routes = [
   {
     path: 'job/edit_job/:id',
     component: EditJobComponent,
+    canActivate: [UserGuard, EmployerGuard],
+  },
+  {
+    path: 'job/:id',
+    component: DetailJobComponent,
     canActivate: [UserGuard, EmployerGuard],
   },
   { path: 'job', component: JobComponent, canActivate: [UserGuard] },

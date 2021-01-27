@@ -11,11 +11,13 @@ export class HomeComponent implements OnInit {
   constructor(private applicantService: ApplicantService) {}
 
   ngOnInit(): void {
-    this.applicantService.getUserApplicants(3).subscribe(data => {
-      console.log(JSON.stringify(data) + '\n');
-    });
-    this.applicantService.getJobApplicants(27).subscribe(data => {
-      console.log(JSON.stringify(data));
-    });
+    this.applicantService.applyJob({
+      userId: 3,
+      jobId: 28,
+      id: 0,
+      applicationDate: new Date()
+    }).subscribe(data => {
+      console.log(data);
+    })
   }
 }

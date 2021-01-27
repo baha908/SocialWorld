@@ -40,6 +40,15 @@ export class ApplicantService {
     );
   }
 
+  async ifJobApplied(jobId: number): Promise<boolean> {
+    const response = await this
+      .getUserApplicants(Number(localStorage.getItem('userId')))
+      .toPromise();
+    return response
+      .map((data) => data.jobId.toString())
+      .includes(jobId.toString());
+  }
+  
   private setHttpOptions(): void {
     this.httpOptions = {
       headers: new HttpHeaders({
