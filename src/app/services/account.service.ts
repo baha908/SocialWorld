@@ -14,30 +14,20 @@ export class AccountService {
   ) {}
   path = 'http://localhost:56183/api/auth/';
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    }),
-  };
+  httpOptions = {};
   async login(user: UserLoginModel): Promise<any> {
-    let userId!: string;
-    let ifUserHaveCompany: boolean;
-    return await this.http
-      .post<any>(this.path + 'signin', user, this.httpOptions).pipe(retry(3))
+    return this.http
+      .post<any>(this.path + 'signin', user, this.httpOptions)
       .toPromise()
       .then(async (data) => {
         localStorage.setItem('loggedUser', user.email);
         localStorage.setItem('token', data.token);
-      })
-      .then(async () => {
-        userId = (await this.getActiveUser()).id.toString();
-      })
-      .then(async () => {
+        this.setHttpOptions();
+        const userId = (await this.getActiveUser()).id.toString();
         localStorage.setItem('userId', userId);
-        ifUserHaveCompany = await this.companyService.ifUserHaveCompany();
       })
       .then(async () => {
+        const ifUserHaveCompany = await this.companyService.ifUserHaveCompany();
         if (ifUserHaveCompany) {
           localStorage.setItem('hasCompany', 'true');
         }
@@ -52,10 +42,9 @@ export class AccountService {
 
   async getActiveUser(): Promise<User> {
     return await this.http
-      .get<User>(this.path + 'getactiveuser', this.httpOptions).pipe(retry(3))
+      .get<User>(this.path + 'getactiveuser', this.httpOptions)
       .toPromise();
   }
-
   isLoggedIn(): boolean {
     return localStorage.getItem('token') != null;
   }
@@ -65,5 +54,13 @@ export class AccountService {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('hasCompany');
+  }
+  private setHttpOptions(): void {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
   }
 }

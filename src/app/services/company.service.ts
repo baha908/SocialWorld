@@ -1,22 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { retry, tap } from 'rxjs/operators';
 import { Company } from '../models/company';
-import { AccountService } from './account.service';
 
 @Injectable()
 export class CompanyService {
   constructor(private http: HttpClient) {}
   path = 'http://localhost:56183/api/company/';
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    }),
-  };
+  httpOptions = {};
   addCompany(company: Company): Observable<Company> {
+    this.setHttpOptions();
     return this.http.post<Company>(
       this.path,
       {
@@ -28,6 +22,7 @@ export class CompanyService {
     );
   }
   editCompany(company: Company): Promise<Company> {
+    this.setHttpOptions();
     return this.http
       .put<Company>(
         this.path + company.id,
@@ -41,27 +36,38 @@ export class CompanyService {
       .toPromise();
   }
   async deleteCompany(id: number): Promise<void> {
+    this.setHttpOptions();
     const response = await this.http
       .delete<void>(this.path + id, this.httpOptions)
       .toPromise();
     return response;
   }
   getUserCompanies(): Observable<Company[]> {
+    this.setHttpOptions();
     return this.http.get<Company[]>(
       this.path + 'getcompanies/' + localStorage.getItem('userId'),
       this.httpOptions
-    ).pipe(retry(3));
+    );
   }
 
   getCompanyById(id: number): Observable<Company> {
+    this.setHttpOptions();
     return this.http.get<Company>(this.path + `${id}`, this.httpOptions);
   }
-
   async ifUserHaveCompany(): Promise<boolean> {
+    this.setHttpOptions();
     const response = await this.getUserCompanies().toPromise();
     if (response.length === 0) {
       return false;
     }
     return true;
+  }
+  private setHttpOptions(): void {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
   }
 }

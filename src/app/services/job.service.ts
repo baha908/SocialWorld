@@ -10,15 +10,11 @@ import { JobType } from '../models/job-type';
 export class JobService {
   constructor(private http: HttpClient) {}
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    }),
-  };
+  httpOptions = {};
   jobTypePath = 'http://localhost:56183/api/jobtype/';
   jobPath = 'http://localhost:56183/api/job/';
   addJob(job: Job): Observable<Job> {
+    this.setHttpOptions();
     return this.http.post<Job>(
       this.jobPath,
       {
@@ -30,6 +26,7 @@ export class JobService {
     );
   }
   editJob(job: Job): Promise<any> {
+    this.setHttpOptions();
     return this.http.put<any>(
       this.jobPath + job.id,
       {
@@ -40,15 +37,27 @@ export class JobService {
     ).toPromise();
   }
   deleteJob(id: number): Promise<void> {
+    this.setHttpOptions();
     return this.http.delete<void>(this.jobPath + id, this.httpOptions).toPromise();
   }
   getJobTypes(): Observable<JobType[]> {
+    this.setHttpOptions();
     return this.http.get<JobType[]>(this.jobTypePath, this.httpOptions);
   }
   getJobs(): Observable<Job[]> {
+    this.setHttpOptions();
     return this.http.get<Job[]>(this.jobPath, this.httpOptions);
   }
   getJob(id: number): Observable<Job> {
+    this.setHttpOptions();
     return this.http.get<Job>(this.jobPath + id, this.httpOptions);
+  }
+  private setHttpOptions(): void {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
   }
 }
