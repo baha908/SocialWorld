@@ -22,39 +22,50 @@ export class JobService {
         JobTypeId: job.jobTypeId,
         CompanyId: job.companyId,
         Explanation: job.explanation,
-        PhotoString: job.photoString
+        PhotoString: job.photoString,
       },
       this.httpOptions
     );
   }
   editJob(job: Job): Promise<any> {
     this.setHttpOptions();
-    return this.http.put<any>(
-      this.jobPath + job.id,
-      {
-        Name: job.name,
-        Id: job.id,
-        Explanation: job.explanation,
-        PhotoString: job.photoString
-      },
-      this.httpOptions
-    ).toPromise();
+    return this.http
+      .put<any>(
+        this.jobPath + job.id,
+        {
+          Name: job.name,
+          Id: job.id,
+          Explanation: job.explanation,
+          PhotoString: job.photoString,
+        },
+        this.httpOptions
+      )
+      .toPromise();
   }
   deleteJob(id: number): Promise<void> {
     this.setHttpOptions();
-    return this.http.delete<void>(this.jobPath + id, this.httpOptions).toPromise();
+    return this.http
+      .delete<void>(this.jobPath + id, this.httpOptions)
+      .toPromise();
   }
   getJobTypes(): Observable<JobType[]> {
     this.setHttpOptions();
     return this.http.get<JobType[]>(this.jobTypePath, this.httpOptions);
   }
-  getJobs(): Observable<Job[]> {
+  getAllJobs(): Observable<Job[]> {
     this.setHttpOptions();
     return this.http.get<Job[]>(this.jobPath, this.httpOptions);
   }
-  getJob(id: number): Observable<Job> {
+  getJobs(companyId: number): Observable<Job[]> {
     this.setHttpOptions();
-    return this.http.get<Job>(this.jobPath + id, this.httpOptions);
+    return this.http.get<Job[]>(
+      this.jobPath + 'getjobsbycompanyid/' + companyId,
+      this.httpOptions
+    );
+  }
+  getJob(jobId: number): Observable<Job> {
+    this.setHttpOptions();
+    return this.http.get<Job>(this.jobPath + jobId, this.httpOptions);
   }
   private setHttpOptions(): void {
     this.httpOptions = {

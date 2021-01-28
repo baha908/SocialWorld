@@ -1,4 +1,7 @@
 
+              
+
+              
 <div class="container">
 
   <div class="row">
@@ -10,7 +13,8 @@
           <p>{{job.explanation}}</p><hr>
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-              <a class="btn btn-sm btn-outline-secondary" href="/job/{{job.id}}">Detay</a>
+              <a class="btn btn-sm btn-outline-secondary" href="company/{{companyId}}/edit_job/{{job.id}}">Düzenle</a>
+              <a class="btn btn-sm btn-outline-secondary" (click)="deleteJob(job.id)">Sil</a>
             </div>
           </div>
         </div>

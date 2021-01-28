@@ -16,6 +16,10 @@
               <a class="btn btn-sm btn-outline-secondary"  href="/company/edit_company/{{company.id}}">Düzenle</a>
               <a class="btn btn-sm btn-outline-secondary" (click)="deleteCompany(company.id)">Sil</a>
             </div>
+            <div class="btn-group">
+              <a class="btn btn-sm btn-outline-secondary"  href="/company/{{company.id}}">İşler</a>
+              <a class="btn btn-sm btn-outline-secondary"  href="/company/{{company.id}}/add_job">İş Ekle</a>
+            </div>
           </div>
         </div>
       </div>

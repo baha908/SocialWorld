@@ -33,7 +33,6 @@ export class AccountService {
         }
       });
   }
-
   async register(user: UserRegisterModel): Promise<any> {
     return this.http
       .post<any>(this.path + 'signup', user, this.httpOptions)

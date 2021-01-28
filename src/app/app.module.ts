@@ -19,10 +19,11 @@ import { VolunteerGuard } from './guards/volunteer.guard';
 import { EmployerGuard } from './guards/employer.guard';
 import { JobComponent } from './job/job.component';
 import { CompanyService } from './services/company.service';
-import { AddJobComponent } from './job/add-job/add-job.component';
-import { EditJobComponent } from './job/edit-job/edit-job.component';
+import { AddJobComponent } from './company/company-job/add-job/add-job.component';
+import { EditJobComponent } from './company/company-job/edit-job/edit-job.component';
 import { EditCompanyComponent } from './company/edit-company/edit-company.component';
 import { DetailJobComponent } from './job/detail-job/detail-job.component';
+import { CompanyJobComponent } from './company/company-job/company-job.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DetailJobComponent } from './job/detail-job/detail-job.component';
     AddJobComponent,
     EditJobComponent,
     EditCompanyComponent,
-    DetailJobComponent
+    DetailJobComponent,
+    CompanyJobComponent
   ],
   imports: [
     BrowserModule,

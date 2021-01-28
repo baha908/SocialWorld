@@ -11,12 +11,10 @@
             <p><b>Email:</b>{{company.email}}</p>
             <p><b>Adres:</b>{{company.address}}</p>
             <p><b>Telefon:</b>{{company.phoneNumber}}</p>
-            <p *ngIf="ifJobApplied"><b>Katılım:</b>{{applicant.applicationDate}}</p>
           </div><!-- / project-info-box -->
 
             <div class="btn-group  offset-sm-1">
               <a class="btn btn-sm btn-outline-secondary"  *ngIf="!ifJobApplied" (click)="applyJob()">Katıl</a>
-              <a class="btn btn-sm btn-outline-secondary" *ngIf="ifUsersJob()" (click)="deleteJob(job.id)">Sil</a>
             </div>
       </div><!-- / column -->
 

@@ -28,11 +28,12 @@ export class DetailJobComponent implements OnInit {
   applicant = new Applicant();
   company = new Company();
   ifJobApplied!: boolean;
+  ifUserIsEmployer!: boolean;
 
   applyJob(): void {
     this.applicantService.applyJob(this.applicant).subscribe(
       (data) => {
-        this.alertifyService.success(this.job.name + "'e başvurdunuz.");
+        this.alertifyService.success(this.job.name + '\'e başvurdunuz.');
         this.ifJobApplied = true;
       },
       () => {
@@ -41,20 +42,7 @@ export class DetailJobComponent implements OnInit {
     );
   }
 
-  deleteJob(id: number): void {
-    this.jobService
-      .deleteJob(id)
-      .then(() => {
-        this.alertifyService.success('Silme başarılı');
-        this.router.navigate(['job']);
-      })
-      .catch(() => {
-        this.alertifyService.error('Hata');
-      });
-  }
-  ifUsersJob(): boolean{
-    return Number(localStorage.getItem('userId')) === this.company.userId;
-  }
+
   async ngOnInit(): Promise<void> {
     this.applicant.jobId = this.route.snapshot.params.id;
     this.applicant.userId = Number(localStorage.getItem('userId'));
