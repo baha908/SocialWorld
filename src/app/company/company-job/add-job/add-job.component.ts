@@ -16,7 +16,6 @@ import { Job } from '../../../models/job';
 export class AddJobComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private companyService: CompanyService,
     private jobService: JobService,
     private alertifyService: AlertifyService,
     private router: Router,
@@ -31,7 +30,6 @@ export class AddJobComponent implements OnInit {
     this.addJobForm = this.formBuilder.group({
       name: ['', Validators.required],
       jobTypeId: ['', Validators.required],
-      companyId: ['', Validators.required],
       photoString: ['', Validators.required],
       explanation: ['', Validators.required],
     });
@@ -41,6 +39,7 @@ export class AddJobComponent implements OnInit {
     this.companyId = this.route.snapshot.params.companyId;
     if (this.addJobForm.valid) {
       this.job = Object.assign({}, this.addJobForm.value);
+      this.job.companyId = this.companyId;
     }
     this.jobService.addJob(this.job).subscribe((data) => {
       this.alertifyService.success(data.name + ' eklendi');
@@ -52,9 +51,6 @@ export class AddJobComponent implements OnInit {
     this.createAddJobForm();
     this.jobService.getJobTypes().subscribe((data) => {
       this.jobTypes = data;
-    });
-    this.companyService.getUserCompanies().subscribe((data) => {
-      this.companies = data;
     });
   }
 }

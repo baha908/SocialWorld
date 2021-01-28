@@ -88,26 +88,6 @@
     </div>
     
     <div class="form-group row">
-      <label for="companyId" class="col-sm-3 col-form-label">Şirket</label>
-      <div class="col-sm-9">
-        <select class="form-control" formControlName="companyId" name="companyId" id="companyId" value="">
-          <option value="" selected disabled hidden>Şirket seç</option>
-          <option *ngFor="let company of companies" [value]="company.id">
-            {{ company.name }}
-          </option>
-        </select>
-      </div>
-    </div>
-    <div
-      class="alert alert-danger"
-      *ngIf="
-        addJobForm.get('companyId')?.hasError('required') &&
-        addJobForm.get('companyId')?.touched
-      "
-    >
-      Şirket seçmediniz
-    </div>
-    <div class="form-group row">
       <label for="address" class="col-sm-3 col-form-label">İş türü</label>
       <div class="col-sm-9">
         <select class="form-control" formControlName="jobTypeId" name="jobTypeId" id="jobTypeId" value="">
