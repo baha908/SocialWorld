@@ -41,12 +41,12 @@ export class RegisterComponent implements OnInit {
           password: this.model.password,
         });
       })
-      .catch(() => {
-        this.alertifyService.error('kayıt başarısız');
-      })
       .then(() => {
         this.alertifyService.success(this.model.email + ' kayıt yaptı');
         this.router.navigate(['']);
+      })
+      .catch(() => {
+        this.alertifyService.error('kayıt başarısız');
       });
   }
   ngOnInit(): void {
