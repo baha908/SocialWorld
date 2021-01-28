@@ -1,17 +1,21 @@
-<div class="container" *ngFor="let job of jobs">
+
+<div class="container">
+
   <div class="row">
-    <div class="col-md-6 img">
-      <img src={{job.photoString}}  alt="" class="img-rounded">
-    </div>
-    <div class="col-md-6 details">
-      <blockquote>
-        <h5>{{job.name}}</h5>
-      </blockquote>
-      <p>{{job.explanation}}
-         <br>
-      </p>
-      <a href="/job/edit_job/{{job.id}}">Düzenle</a>
-      <a href="/job/{{job.id}}">Detay</a>
+    <div class="col-md-4" *ngFor="let job of jobs">
+      <div class="card mb-4 box-shadow">
+        <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src={{job.photoString}}>
+        <div class="card-body">
+          <h4 class="card-text">{{job.name}}</h4><hr>
+          <p>{{job.explanation}}</p><hr>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a class="btn btn-sm btn-outline-secondary" href="/job/edit_job/{{job.id}}">Düzenle</a>
+              <a class="btn btn-sm btn-outline-secondary" href="/job/{{job.id}}">Detay</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserGuard } from './guards/user.guard';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'SocialWorld';
+  constructor(){}
+  isLoggedIn(): boolean{
+    return localStorage.getItem('token') != null;
+  }
 }

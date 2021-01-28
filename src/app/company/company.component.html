@@ -1,20 +1,24 @@
-<div class="container" *ngFor="let company of companies">
+
+<div class="container">
+
   <div class="row">
-    <div class="col-md-6 img">
-      <img src={{company.photoString}}  alt="" class="img-rounded">
-    </div>
-    <div class="col-md-6 details">
-      <blockquote>
-        <h5>{{company.name}}</h5>
-        <small><cite title="Source Title">{{company.explanation}} <i class="icon-map-marker"></i></cite></small>
-      </blockquote>
-      <p>
-        {{company.email}} <br>
-        {{company.address}} <br>
-        {{company.phoneNumber}}
-      </p>
-      <a href="/company/edit_company/{{company.id}}">Düzenle</a>
-      <a (click)="deleteCompany(company.id)">Sil</a>
+    <div class="col-md-4" *ngFor="let company of companies">
+      <div class="card mb-4 box-shadow">
+        <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src={{company.photoString}}>
+        <div class="card-body">
+          <h4 class="card-text">{{company.name}}</h4><hr>
+          <p>{{company.explanation}}</p><hr>
+          <p>{{company.address}}</p><hr>
+          <p>{{company.email}}</p><hr>
+          <p>{{company.phoneNumber}}</p><hr>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a class="btn btn-sm btn-outline-secondary"  href="/company/edit_company/{{company.id}}">Düzenle</a>
+              <a class="btn btn-sm btn-outline-secondary" (click)="deleteCompany(company.id)">Sil</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

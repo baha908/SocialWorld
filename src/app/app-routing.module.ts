@@ -45,7 +45,7 @@ const routes: Routes = [
   {
     path: 'job/:id',
     component: DetailJobComponent,
-    canActivate: [UserGuard, EmployerGuard],
+    canActivate: [UserGuard],
   },
   { path: 'job', component: JobComponent, canActivate: [UserGuard] },
   { path: 'register', component: RegisterComponent },

@@ -9,7 +9,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { NavBarComponent } from './layout/navbar/navbar.component';
-import { FooterComponent } from './layout/footer/footer.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { AccountService } from './services/account.service';
 import { AlertifyService } from './services/alertify.service';
@@ -32,7 +31,6 @@ import { DetailJobComponent } from './job/detail-job/detail-job.component';
     RegisterComponent,
     HomeComponent,
     NavBarComponent,
-    FooterComponent,
     SidebarComponent,
     CompanyComponent,
     AddCompanyComponent,
