@@ -22,6 +22,7 @@
       </li>
     </ul>
     <div class="navbar">
+      <div *ngIf="isLoggedIn()" class="nav-link">{{loogedUser()}}</div>
       <a *ngIf="!isLoggedIn()" class="nav-link" routerLink="register">Register</a>
       <a *ngIf="!isLoggedIn()" class="nav-link" routerLink="login">Login</a>
       <a *ngIf="isLoggedIn()" class="nav-link" (click)="logout()">Logout</a>

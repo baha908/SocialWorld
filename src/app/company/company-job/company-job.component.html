@@ -5,7 +5,7 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-md-4" *ngFor="let job of jobs">
+    <div class="col-md-4" *ngFor="let job of jobs | jobFilterByCompanyId: companyId">
       <div class="card mb-4 box-shadow">
         <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src={{job.photoString}}>
         <div class="card-body">

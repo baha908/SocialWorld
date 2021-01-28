@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
 import { NavBarComponent } from './layout/navbar/navbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { AccountService } from './services/account.service';
@@ -24,13 +23,13 @@ import { EditJobComponent } from './company/company-job/edit-job/edit-job.compon
 import { EditCompanyComponent } from './company/edit-company/edit-company.component';
 import { DetailJobComponent } from './job/detail-job/detail-job.component';
 import { CompanyJobComponent } from './company/company-job/company-job.component';
+import { JobFilterByCompanyIdPipe } from './pipes/job-filter-by-company-id.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
     NavBarComponent,
     SidebarComponent,
     CompanyComponent,
@@ -40,7 +39,8 @@ import { CompanyJobComponent } from './company/company-job/company-job.component
     EditJobComponent,
     EditCompanyComponent,
     DetailJobComponent,
-    CompanyJobComponent
+    CompanyJobComponent,
+    JobFilterByCompanyIdPipe
   ],
   imports: [
     BrowserModule,

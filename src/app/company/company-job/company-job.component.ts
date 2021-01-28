@@ -7,7 +7,7 @@ import { JobService } from 'src/app/services/job.service';
 @Component({
   selector: 'app-company-job',
   templateUrl: './company-job.component.html',
-  styleUrls: ['./company-job.component.scss'],
+  styleUrls: ['./company-job.component.scss']
 })
 export class CompanyJobComponent implements OnInit {
   constructor(
@@ -33,7 +33,7 @@ export class CompanyJobComponent implements OnInit {
   }
   getJobs(): void {
     this.companyId = this.route.snapshot.params.companyId;
-    this.jobService.getJobs(this.companyId).subscribe((data) => {
+    this.jobService.getAllJobs().subscribe((data) => {
       this.jobs = data;
     });
   }

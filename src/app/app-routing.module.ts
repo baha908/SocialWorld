@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddCompanyComponent } from './company/add-company/add-company.component';
 import { CompanyComponent } from './company/company.component';
-import { HomeComponent } from './home/home.component';
 import { JobComponent } from './job/job.component';
 import { EmployerGuard } from './guards/employer.guard';
 import { LoginComponent } from './login/login.component';
@@ -15,8 +14,7 @@ import { DetailJobComponent } from './job/detail-job/detail-job.component';
 import { CompanyJobComponent } from './company/company-job/company-job.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, canActivate: [UserGuard] },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'job', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'company/add_company',

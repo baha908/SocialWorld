@@ -15,6 +15,9 @@ export class NavBarComponent implements OnInit {
   isLoggedIn(): boolean {
     return this.accountService.isLoggedIn();
   }
+  loogedUser(): string {
+    return '' + localStorage.getItem('loggedUser');
+  }
   logout(): void {
     this.accountService.logout();
     this.alertifyService.warning('Çıkış yapıldı');
