@@ -9,6 +9,6 @@ import { UserGuard } from './guards/user.guard';
 export class AppComponent {
   constructor(){}
   isLoggedIn(): boolean{
-    return localStorage.getItem('token') != null;
+    return sessionStorage.getItem('token') != null;
   }
 }

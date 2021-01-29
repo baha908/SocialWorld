@@ -45,7 +45,7 @@ export class DetailJobComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.applicant.jobId = this.route.snapshot.params.id;
-    this.applicant.userId = Number(localStorage.getItem('userId'));
+    this.applicant.userId = Number(sessionStorage.getItem('userId'));
     this.ifJobApplied = await this.applicantService.ifJobApplied(
       this.applicant.jobId
     );

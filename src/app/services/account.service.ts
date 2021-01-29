@@ -20,16 +20,16 @@ export class AccountService {
       .post<any>(this.path + 'signin', user, this.httpOptions)
       .toPromise()
       .then(async (data) => {
-        localStorage.setItem('loggedUser', user.email);
-        localStorage.setItem('token', data.token);
+        sessionStorage.setItem('loggedUser', user.email);
+        sessionStorage.setItem('token', data.token);
         this.setHttpOptions();
         const userId = (await this.getActiveUser()).id.toString();
-        localStorage.setItem('userId', userId);
+        sessionStorage.setItem('userId', userId);
       })
       .then(async () => {
         const ifUserHaveCompany = await this.companyService.ifUserHaveCompany();
         if (ifUserHaveCompany) {
-          localStorage.setItem('hasCompany', 'true');
+          sessionStorage.setItem('hasCompany', 'true');
         }
       });
   }
@@ -45,20 +45,20 @@ export class AccountService {
       .toPromise();
   }
   isLoggedIn(): boolean {
-    return localStorage.getItem('token') != null;
+    return sessionStorage.getItem('token') != null;
   }
 
   logout(): void {
-    localStorage.removeItem('loggedUser');
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('hasCompany');
+    sessionStorage.removeItem('loggedUser');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('hasCompany');
   }
   private setHttpOptions(): void {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
       }),
     };
   }

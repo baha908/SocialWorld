@@ -42,7 +42,7 @@ export class ApplicantService {
 
   async ifJobApplied(jobId: number): Promise<boolean> {
     const response = await this.getUserApplicants(
-      Number(localStorage.getItem('userId'))
+      Number(sessionStorage.getItem('userId'))
     ).toPromise();
     return response
       .map((data) => data.jobId.toString())
@@ -53,7 +53,7 @@ export class ApplicantService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
       }),
     };
   }

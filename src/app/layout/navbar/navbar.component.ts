@@ -16,7 +16,7 @@ export class NavBarComponent implements OnInit {
     return this.accountService.isLoggedIn();
   }
   loogedUser(): string {
-    return '' + localStorage.getItem('loggedUser');
+    return '' + sessionStorage.getItem('loggedUser');
   }
   logout(): void {
     this.accountService.logout();

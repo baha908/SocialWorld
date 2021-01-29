@@ -53,7 +53,7 @@ export class CompanyService {
   getUserCompanies(): Observable<Company[]> {
     this.setHttpOptions();
     return this.http.get<Company[]>(
-      this.path + 'getcompanies/' + localStorage.getItem('userId'),
+      this.path + 'getcompanies/' + sessionStorage.getItem('userId'),
       this.httpOptions
     );
   }
@@ -74,7 +74,7 @@ export class CompanyService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
       }),
     };
   }

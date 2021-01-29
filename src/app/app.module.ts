@@ -24,6 +24,7 @@ import { EditCompanyComponent } from './company/edit-company/edit-company.compon
 import { DetailJobComponent } from './job/detail-job/detail-job.component';
 import { CompanyJobComponent } from './company/company-job/company-job.component';
 import { JobFilterByCompanyIdPipe } from './pipes/job-filter-by-company-id.pipe';
+import { ShortStringPipe } from './pipes/shortString.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { JobFilterByCompanyIdPipe } from './pipes/job-filter-by-company-id.pipe'
     EditCompanyComponent,
     DetailJobComponent,
     CompanyJobComponent,
-    JobFilterByCompanyIdPipe
+    JobFilterByCompanyIdPipe,
+    ShortStringPipe
   ],
   imports: [
     BrowserModule,

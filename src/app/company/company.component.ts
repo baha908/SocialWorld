@@ -23,7 +23,7 @@ export class CompanyComponent implements OnInit {
       })
       .then(async () => {
         if (!(await this.companyService.ifUserHaveCompany())) {
-          localStorage.removeItem('hasCompany');
+          sessionStorage.removeItem('hasCompany');
         }
         this.alertifyService.success('Silme başarılı');
       })

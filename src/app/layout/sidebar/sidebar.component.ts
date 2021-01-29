@@ -13,10 +13,10 @@ export class SidebarComponent implements OnInit {
   constructor() {}
 
   isUserHaveCompany(): boolean{
-    return localStorage.getItem('hasCompany') != null;
+    return sessionStorage.getItem('hasCompany') != null;
   }
   isLoggedIn(): boolean {
-    return localStorage.getItem('token') != null;
+    return sessionStorage.getItem('token') != null;
   }
   ngOnInit(): void {}
 }

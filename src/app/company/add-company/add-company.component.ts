@@ -33,12 +33,12 @@ export class AddCompanyComponent implements OnInit {
 
   addCompany(): void {
     if (this.addCompanyForm.valid) {
-      const userId = Number(localStorage.getItem('userId'));
+      const userId = Number(sessionStorage.getItem('userId'));
       this.company = Object.assign({}, this.addCompanyForm.value);
       this.company.userId = userId;
     }
     this.companyService.addCompany(this.company).subscribe((data) => {
-      localStorage.setItem('hasCompany', 'true');
+      sessionStorage.setItem('hasCompany', 'true');
       this.alertifyService.success(data.name + ' şirketi eklendi');
       this.router.navigate(['company']);
     });
